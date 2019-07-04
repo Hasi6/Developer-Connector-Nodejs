@@ -2,8 +2,6 @@ const express = require('express');
 const router = express.Router();
 
 // Get all auth
-router.get('/', (req, res)=>{
+module.exports = ((req, res)=>{
     res.send('Auth route');
 });
-
-module.exports = router;

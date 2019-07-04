@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 
 // Get Profile
-module.exports = router.get('/', (req, res)=>{
+module.exports = ((req, res)=>{
     res.send('Profile route');
 });
 

@@ -1,9 +1,8 @@
 const express = require('express');
 const router = express.Router();
 
-// Get all Post
-router.get('/', (req, res)=>{
-    res.send('Post route');
+// Get Profile
+module.exports = ((req, res)=>{
+    res.send('Posts route');
 });
 
-module.exports = router;
