@@ -1,3 +1,5 @@
 {
-    "mongoURI": "mongodb+srv://Hasitha:Freedom6@dev-cvs-94oyy.mongodb.net/test?retryWrites=true&w=majority"
+    "mongoURI": "mongodb://localhost:27017/devcv"
 }
+// mongodb://localhost:27017/devcv
+// mongodb+srv://Hasitha:Freedom6@cluster0-xi7qp.mongodb.net/test?retryWrites=true&w=majority
