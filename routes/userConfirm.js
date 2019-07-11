@@ -42,7 +42,7 @@ const userConfirm = async (req, res)=>{
 
     if(user.userToken == token ){
         req.session.userId = user._id;
-        console.log(req.session.userId);
+        // console.log(req.session.userId);
         return res.send('Logged in');
     }
     return res.send('Invalid Token');

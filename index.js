@@ -38,6 +38,7 @@ const oneProfile = require("./routes/getOneProfile");
 const deleteUser = require("./routes/deleteUser");
 const deleteProfile = require("./routes/deleteProfile");
 const addExperiance = require("./routes/addExperiance");
+const deleteExperience = require("./routes/deleteExperience");
 
 // get Requests
 app.get("/", home);
@@ -53,6 +54,7 @@ app.post("/api/userProfile", userProfile);
 // Delete Requests
 app.delete('/api/user/:id', deleteUser);
 app.delete('/api/profile/:id', deleteProfile);
+app.delete('/api/profile/experience/:id', deleteExperience);
 
 // Put Requests
 app.put('/api/user/experiance', addExperiance);
