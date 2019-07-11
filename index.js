@@ -33,15 +33,29 @@ const userRegister = require("./routes/userRegister");
 const userLogin = require("./routes/userLogin");
 const userConfirm = require("./routes/userConfirm");
 const userProfile = require("./routes/userProfile");
+const allProfiles = require("./routes/getAllProfiles");
+const oneProfile = require("./routes/getOneProfile");
+const deleteUser = require("./routes/deleteUser");
+const deleteProfile = require("./routes/deleteProfile");
+const addExperiance = require("./routes/addExperiance");
 
 // get Requests
 app.get("/", home);
+app.get("/api/profiles", allProfiles);
+app.get("/api/profile/:userId", oneProfile);
 
 // Post Requests
 app.post("/api/userRegister", userRegister);
 app.post("/api/userLogin", userLogin);
 app.post("/api/userConfirm", userConfirm);
 app.post("/api/userProfile", userProfile);
+
+// Delete Requests
+app.delete('/api/user/:id', deleteUser);
+app.delete('/api/profile/:id', deleteProfile);
+
+// Put Requests
+app.put('/api/user/experiance', addExperiance);
 
 const port = 5000;
 

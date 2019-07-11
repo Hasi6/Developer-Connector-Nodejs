@@ -4,6 +4,7 @@ const Profile = require("../models/Profile");
 const userProfile = async (req, res) => {
   try {
     const {
+      name,
       company,
       website,
       location,
@@ -21,6 +22,7 @@ const userProfile = async (req, res) => {
     // profileObject
     const profileObject = {};
     profileObject.user = req.session.userId;
+    if (name) profileObject.name = name;
     if (company) profileObject.company = company;
     if (website) profileObject.website = website;
     if (location) profileObject.location = location;
