@@ -47,6 +47,8 @@ const addPosts = require("./routes/addPost");
 const deletePost = require("./routes/deletePost");
 const addLikes = require("./routes/addLikes");
 const addUnlikes = require("./routes/addUnlikes");
+const addComments = require("./routes/addComments");
+const deleteComments = require("./routes/deleteComments");
 
 // get Requests
 app.get("/", home);
@@ -65,6 +67,7 @@ app.post("/api/userLogin", userLogin);
 app.post("/api/userConfirm", userConfirm);
 app.post("/api/userProfile", userProfile);
 app.post("/api/posts", addPosts);
+app.post("/api/post/:id/comments", addComments);
 
 app.post('*', (req, res)=>{
   return res.send('No page Found');
@@ -76,6 +79,7 @@ app.delete('/api/profile/:id', deleteProfile);
 app.delete('/api/profile/experience/:id', deleteExperience);
 app.delete('/api/profile/education/:id', deleteEducation);
 app.delete('/api/posts/:id', deletePost);
+app.delete('/api/post/:postId/comments/:commentId', deleteComments);
 
 app.delete('*', (req, res)=>{
   return res.send('No page Found');
