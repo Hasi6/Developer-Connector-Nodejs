@@ -1,5 +1,7 @@
 {
-    "mongoURI": "mongodb://localhost:27017/devcv"
+    "mongoURI": "mongodb://localhost:27017/devcv",
+    "githubClientId" : "e741af0eefaf67c46451",
+    "githubSecret" : "960eb569cc017a44f42d0fcdc4d566d478f3b2a0"
 }
 // mongodb://localhost:27017/devcv
 // mongodb+srv://Hasitha:Freedom6@cluster0-xi7qp.mongodb.net/test?retryWrites=true&w=majority

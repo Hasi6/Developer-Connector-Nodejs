@@ -41,11 +41,13 @@ const addExperiance = require("./routes/addExperiance");
 const deleteExperience = require("./routes/deleteExperience");
 const addEducation = require("./routes/addEducation");
 const deleteEducation = require("./routes/deleteEducation");
+const githubUsername = require("./routes/githubUsername");
 
 // get Requests
 app.get("/", home);
 app.get("/api/profiles", allProfiles);
 app.get("/api/profile/:userId", oneProfile);
+app.get("/api/profile/github/:username", githubUsername);
 
 // Post Requests
 app.post("/api/userRegister", userRegister);
