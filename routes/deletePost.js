@@ -6,11 +6,14 @@ const DeletePost = async (req, res)=>{
 
     try{
         const post = await Post.findById(postId);
-        console.log(post);
 
-        // if(post.user != id ){
-        //     return res.send('You can\'t others Posts');
-        // }
+        if(!post){
+            return res.send('No Posts Found');
+        }
+
+        if(post.user != id ){
+            return res.send('You can\'t others Posts');
+        }
 
         const successDelete = await Post.findByIdAndDelete(postId);
 

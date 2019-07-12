@@ -45,6 +45,7 @@ const githubUsername = require("./routes/githubUsername");
 const getPosts = require("./routes/getPosts");
 const addPosts = require("./routes/addPost");
 const deletePost = require("./routes/deletePost");
+const addLikes = require("./routes/addLikes");
 
 // get Requests
 app.get("/", home);
@@ -53,12 +54,20 @@ app.get("/api/profile/:userId", oneProfile);
 app.get("/api/profile/github/:username", githubUsername);
 app.get("/api/posts", getPosts);
 
+app.get('*', (req, res)=>{
+  return res.send('No page Found');
+})
+
 // Post Requests
 app.post("/api/userRegister", userRegister);
 app.post("/api/userLogin", userLogin);
 app.post("/api/userConfirm", userConfirm);
 app.post("/api/userProfile", userProfile);
 app.post("/api/posts", addPosts);
+
+app.post('*', (req, res)=>{
+  return res.send('No page Found');
+})
 
 // Delete Requests
 app.delete('/api/user/:id', deleteUser);
@@ -67,9 +76,18 @@ app.delete('/api/profile/experience/:id', deleteExperience);
 app.delete('/api/profile/education/:id', deleteEducation);
 app.delete('/api/posts/:id', deletePost);
 
+app.delete('*', (req, res)=>{
+  return res.send('No page Found');
+})
+
 // Put Requests
 app.put('/api/user/experiance', addExperiance);
 app.put('/api/user/education', addEducation);
+app.put('/api/posts/likes/:id', addLikes);
+
+app.put('*', (req, res)=>{
+  return res.send('No page Found');
+})
 
 const port = 5000;
 
