@@ -44,6 +44,7 @@ const deleteEducation = require("./routes/deleteEducation");
 const githubUsername = require("./routes/githubUsername");
 const getPosts = require("./routes/getPosts");
 const addPosts = require("./routes/addPost");
+const deletePost = require("./routes/deletePost");
 
 // get Requests
 app.get("/", home);
@@ -64,6 +65,7 @@ app.delete('/api/user/:id', deleteUser);
 app.delete('/api/profile/:id', deleteProfile);
 app.delete('/api/profile/experience/:id', deleteExperience);
 app.delete('/api/profile/education/:id', deleteEducation);
+app.delete('/api/posts/:id', deletePost);
 
 // Put Requests
 app.put('/api/user/experiance', addExperiance);
