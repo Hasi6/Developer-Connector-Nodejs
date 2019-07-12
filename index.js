@@ -43,7 +43,7 @@ const addEducation = require("./routes/addEducation");
 const deleteEducation = require("./routes/deleteEducation");
 const githubUsername = require("./routes/githubUsername");
 const getPosts = require("./routes/getPosts");
-const addPosts = require("./routes/addPosts");
+const addPosts = require("./routes/addPost");
 
 // get Requests
 app.get("/", home);
