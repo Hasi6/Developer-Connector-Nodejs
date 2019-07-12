@@ -1,6 +1,6 @@
 const Post = require("../models/Post");
 
-const addLikes = async (req, res) => {
+const addUnlikes = async (req, res) => {
   const postId = req.params.id;
   const userId = req.session.userId;
 
@@ -16,24 +16,22 @@ const addLikes = async (req, res) => {
         return res.send('No Post Found');
     }
 
-    if(post.likes.filter(like => like.user.toString() === userId).length > 0 ){
-        return res.send('Already Liked this Post');
+    if(post.unlikes.filter(unlike => unlike.user.toString() === userId).length > 0 ){
+        return res.send('Already Unliked this Post');
     }
 
-    
-
-    post.likes.unshift({ user: userId });
+    post.unlikes.unshift({ user: userId });
 
     // get remove Index
-    const removeIndex = post.unlikes.map(unlike => unlike.user.toString()).indexOf(userId);
-    post.unlikes.splice(removeIndex, 1);
+    const removeIndex = post.likes.map(like => like.user.toString()).indexOf(userId);
+    post.likes.splice(removeIndex, 1);
 
     await post.save();
 
-    return res.send(post.likes);
+    return res.send(post.unlikes);
 
   }catch(err){
       console.error(err.message);
   }
 };
-module.exports = addLikes;
+module.exports = addUnlikes;
