@@ -42,18 +42,22 @@ const deleteExperience = require("./routes/deleteExperience");
 const addEducation = require("./routes/addEducation");
 const deleteEducation = require("./routes/deleteEducation");
 const githubUsername = require("./routes/githubUsername");
+const getPosts = require("./routes/getPosts");
+const addPosts = require("./routes/addPosts");
 
 // get Requests
 app.get("/", home);
 app.get("/api/profiles", allProfiles);
 app.get("/api/profile/:userId", oneProfile);
 app.get("/api/profile/github/:username", githubUsername);
+app.get("/api/posts", getPosts);
 
 // Post Requests
 app.post("/api/userRegister", userRegister);
 app.post("/api/userLogin", userLogin);
 app.post("/api/userConfirm", userConfirm);
 app.post("/api/userProfile", userProfile);
+app.post("/api/posts", addPosts);
 
 // Delete Requests
 app.delete('/api/user/:id', deleteUser);

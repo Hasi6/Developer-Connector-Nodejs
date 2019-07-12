@@ -18,8 +18,6 @@ const addExperiance = async (req, res) => {
   try {
     const profile = await Profile.findOne({ user: id });
 
-    console.log(id);
-
     if (!profile) {
       return res.send("No User Found");
     }
