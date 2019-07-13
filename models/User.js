@@ -17,10 +17,10 @@ const UsersSchema = new mongoose.Schema({
         required: true,
         unique: true
     },
-    // birthDay:{
-    //     type: Date,
-    //     required: true
-    // },
+    birthDay:{
+        type: Date,
+        required: true
+    },
     signInDate:{
         type: Date,
         default: Date.now
