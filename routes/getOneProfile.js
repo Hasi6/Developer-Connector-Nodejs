@@ -7,7 +7,7 @@ const getOneProfile = async(req, res)=>{
     const userId = req.params.userId;
     const id = req.session.userId;
 
-    if(!req.session.userId){
+    if(!id){
         return res.render("signup", {msg: 'Unauthorized Action', type: 'danger'});
     }
 
@@ -15,9 +15,9 @@ const getOneProfile = async(req, res)=>{
 
     try{
         const user = await User.findById(userId);
+        const loggedUser = await User.findById(id);
         const posts = await Post.find({user: userId});
 
-        console.log(user.coverPic);
 
         if(user){
             const profile = await Profile.findOne({user:userId});
@@ -25,7 +25,8 @@ const getOneProfile = async(req, res)=>{
                 user: user,
                 profile: profile,
                 posts: posts,
-                id: id
+                id: id,
+                loggedUser: loggedUser
             });
         }
         return res.send('No User Found');

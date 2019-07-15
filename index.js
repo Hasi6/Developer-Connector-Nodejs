@@ -74,7 +74,7 @@ const loginAuth = require('./middleware/userLoginAuth');
 
 // get Requests
 app.get("/", signup);
-app.get("/api/profiles", allProfiles);
+app.get("/api/profiles/:page", allProfiles);
 app.get("/api/profile/:userId", oneProfile);
 app.get("/api/profile/github/:username", githubUsername);
 app.get("/api/posts", getPosts);

@@ -1,0 +1,113 @@
+@layout('layouts.app')
+
+@section('content')
+
+<section class="companies-info">
+    <div class="container">
+        <div class="company-title">
+            <h3>{{allProfilesCount}} Users</h3>
+        </div><!--company-title end-->
+        <div class="companies-list">
+            <div class="row">
+                @each(profile in allProfiles)
+                <div class="col-lg-3 col-md-4 col-sm-6">
+                    <div class="company_profile_info">
+                        <div class="company-up-info">
+                        <img src="{{profile.profilePic}}" alt="" style="border-radius: 50%;
+                        width: 130px;
+                        height: 130px;">
+                        <h3>{{profile.username}}</h3>
+                        <h4>Last Login <br>{{profile.signInDate}}</h4>
+                        </div>
+                    <a href="/api/profile/{{profile.id}}" title="" class="view-more-pro">View Profile</a>
+                    </div><!--company_profile_info end-->
+                </div>
+                @endeach
+            </div>
+        </div><!--companies-list end-->
+        <div class="process-comm">
+            <div class="spinner">
+                <div class="bounce1"></div>
+                <div class="bounce2"></div>
+                <div class="bounce3"></div>
+            </div>
+        </div><!--process-comm end-->
+    </div>
+</section><!--companies-info end-->
+
+<div class="blog-pagenat-wthree container" style="margin: 0 auto">
+		@if(page)
+			<nav class="mx-auto">
+				<ul class="pagination">
+					{{--  First Page  --}}
+					@if(page == 1)
+						<li class="page-item disabled">
+							<a href="" class="page-link">First Page</a>
+						</li>
+					@else
+						<li class="page-item">
+							<a href="/api/profiles/1" class="page-link">First Page</a>
+						</li>	
+					@endif
+					
+					{{--  All Pages  --}}
+						@if(page == 1)
+
+						@each(pag in range(page, ((page)%10)+6))
+						
+						@if(page == pag)
+							<li class="page-item disabled">
+								<a href="" class="page-link">{{ pag }}</a>
+							</li>
+						@else
+							<li class="page-item">
+								<a href="/api/profiles/{{pag}}" class="page-link">{{ pag }}</a>
+							</li>	
+						@endif
+						@endeach
+						
+						@elseif(page <= 5)
+
+						@each(pag in range(page-1, ((page)%10)+6))
+						
+						@if(page == pag)
+							<li class="page-item disabled">
+								<a href="" class="page-link">{{ pag }}</a>
+							</li>
+						@else
+							<li class="page-item">
+								<a href="/api/profiles/{{pag}}" class="page-link">{{ pag }}</a>
+							</li>	
+						@endif
+						@endeach
+
+						@else
+
+						@each(pag in range(page - 5, (page+1)/10+6))
+						
+						@if(page == pag)
+							<li class="page-item disabled">
+								<a href="" class="page-link">{{ pag }}</a>
+							</li>
+						@else
+							<li class="page-item">
+								<a href="/api/profiles/{{pag}}" class="page-link">{{ pag }}</a>
+							</li>
+						@endif
+						@endeach
+						@endif
+					{{--  Last Page  --}}
+					@if(page == pages)
+						<li class="page-item disabled">
+							<a href="" class="page-link">Last Page</a>
+						</li>
+					@else
+						<li class="page-item">
+							<a href="/api/profiles/{{pages}}" class="page-link">Last Page</a>
+						</li>	
+					@endif	
+				</ul>
+			</nav>
+		@endif
+	</div>
+@endsection

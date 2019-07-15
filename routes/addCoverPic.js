@@ -4,8 +4,8 @@ const path = require('path');
 const addCoverPic = async (req, res) => {
   const id = req.session.userId;
 
-  if(id){
-      return res,redirect('signup', {msg: 'Unauthorized Action', type: 'danger'});
+  if(!id){
+      return res.render('signup', {msg: 'Unauthorized Action', type: 'danger'});
   }
 
   let backURL=req.header('Referer') || '/';
