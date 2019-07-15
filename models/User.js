@@ -32,6 +32,14 @@ const UsersSchema = new mongoose.Schema({
     userToken:{
         type: String,
         default: token
+    },
+    profilePic: {
+        type: String,
+        default:"/images/profile.png"
+    },
+    coverPic: {
+        type: String,
+        default:"/images/cover.jpg"
     }
 });
 

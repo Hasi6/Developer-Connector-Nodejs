@@ -15,38 +15,38 @@ const PostSchema = new Schema({
         type: String,
         required: true
     },
-    likes:[
-        {
-            user:{
-                type: Schema.Types.ObjectId,
-                required: true
-            }
-        }
-    ],
-    unlikes:[
-        {
-            user:{
-                type: Schema.Types.ObjectId,
-                required: true
-            }
-        }
-    ],
-    comments: [
-        {
-            user:{
-                type: Schema.Types.ObjectId,
-                required: true
-            },
-            text: {
-                type: String,
-                required: true
-            },
-            date:{
-                type: Date,
-                default: Date.now
-            } 
-        }
-    ],
+    // likes:[
+    //     {
+    //         user:{
+    //             type: Schema.Types.ObjectId,
+    //             required: true
+    //         }
+    //     }
+    // ],
+    // unlikes:[
+    //     {
+    //         user:{
+    //             type: Schema.Types.ObjectId,
+    //             required: true
+    //         }
+    //     }
+    // ],
+    // comments: [
+    //     {
+    //         user:{
+    //             type: Schema.Types.ObjectId,
+    //             required: true
+    //         },
+    //         text: {
+    //             type: String,
+    //             required: true
+    //         },
+    //         date:{
+    //             type: Date,
+    //             default: Date.now
+    //         } 
+    //     }
+    // ],
     date:{
         type: Date,
         default: Date.now

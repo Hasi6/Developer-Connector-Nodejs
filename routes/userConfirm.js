@@ -1,51 +1,25 @@
 const User = require('../models/User');
-const nodemailer = require("nodemailer");
-
 
 const userConfirm = async (req, res)=>{
 
     try{
-    const userId = req.body.id;
-    console.log(userId);
+    const { email, userToken } = req.body;
 
-    const token = req.body.userToken;
-    console.log(token);
 
-    const user = await User.findById(userId);
-    console.log(user.userToken);
+    const user = await User.findOne({email: email});
 
-    const output = `
-      <ul>
-        <li>User Token${user.userToken}</li>
-      </ul>
-    `;
-    // let testAccount = await nodemailer.createTestAccount();
-
-    var nodeoutlook = require("nodejs-nodemailer-outlook");
-    nodeoutlook.sendEmail({
-      auth: {
-        user: "udhmovies@outlook.com",
-        pass: "moviesUdh"
-      },
-      from: "udhmovies@outlook.com",
-      to: user.email,
-      subject: "Successfully Subscribe to udhmovies.com",
-      html: output,
-
-      onError: e => console.log(e),
-      onSuccess: i => console.log(i)
-    });
+    
 
     if(!user){
-        return res.send("Invalid Id");
+      return res.render('confirm', {msg: 'No User Found in this Email', type: 'danger'});
     }
 
-    if(user.userToken == token ){
+    if(user.userToken == userToken ){
         req.session.userId = user._id;
-        // console.log(req.session.userId);
-        return res.send('Logged in');
+        await User.findOneAndUpdate({email: email}, { $set: {confirmed : true}});
+        return res.redirect(`/api/profile/${req.session.userId}`);
     }
-    return res.send('Invalid Token');
+    return res.render('confirm', {msg: 'Invalid Token', type: 'danger'});
 }catch(err){
     console.error(err.message);
 }

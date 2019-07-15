@@ -4,12 +4,15 @@ const app = new express();
 const expressSession = require("express-session");
 const connectMongo = require("connect-mongo");
 const edge = require('edge.js');
+const bodyParser = require("body-parser");
+const methodOverride = require('method-override');
+const fileUpload = require('express-fileupload');
 
 
 // connet with database
 const connectDb = require("./config/db");
 connectDb();
-app.use(express.json({ extended: false }));
+
 // express Sessions
 const mongoStore = connectMongo(expressSession);
 app.use(
@@ -21,6 +24,17 @@ app.use(
   })
 );
 
+app.use(fileUpload());
+
+app.use(express.static("public"));
+
+// template engines
+app.use(require('express-edge'));
+app.set('views', `${__dirname}/views`);
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(methodOverride('_method'));
+
 // share session globally then we can display login log out like that conditionally
 app.use("*", async (req, res, next) => {
   edge.global("auth", req.session.userId);
@@ -28,7 +42,7 @@ app.use("*", async (req, res, next) => {
 });
 
 // router variables
-const home = require("./routes/home");
+const signup = require("./routes/signup");
 const userRegister = require("./routes/userRegister");
 const userLogin = require("./routes/userLogin");
 const userConfirm = require("./routes/userConfirm");
@@ -44,26 +58,36 @@ const deleteEducation = require("./routes/deleteEducation");
 const githubUsername = require("./routes/githubUsername");
 const getPosts = require("./routes/getPosts");
 const addPosts = require("./routes/addPost");
+const singlePost = require("./routes/singlePost");
 const deletePost = require("./routes/deletePost");
 const addLikes = require("./routes/addLikes");
 const addUnlikes = require("./routes/addUnlikes");
 const addComments = require("./routes/addComments");
 const deleteComments = require("./routes/deleteComments");
+const logout = require('./routes/logout');
+const addCoverPic = require('./routes/addCoverPic');
+const addProfilePic = require('./routes/addProfilePic');
+
+// Middlewares
+const registerAuth = require('./middleware/userRegisterAuth');
+const loginAuth = require('./middleware/userLoginAuth');
 
 // get Requests
-app.get("/", home);
+app.get("/", signup);
 app.get("/api/profiles", allProfiles);
 app.get("/api/profile/:userId", oneProfile);
 app.get("/api/profile/github/:username", githubUsername);
 app.get("/api/posts", getPosts);
+app.get("/api/logout", logout);
+app.get("/api/singlePost/:id", singlePost);
 
 app.get('*', (req, res)=>{
   return res.send('No page Found');
 })
 
 // Post Requests
-app.post("/api/userRegister", userRegister);
-app.post("/api/userLogin", userLogin);
+app.post("/api/userRegister", registerAuth, userRegister);
+app.post("/api/userLogin", loginAuth, userLogin);
 app.post("/api/userConfirm", userConfirm);
 app.post("/api/userProfile", userProfile);
 app.post("/api/posts", addPosts);
@@ -87,6 +111,8 @@ app.delete('*', (req, res)=>{
 
 // Put Requests
 app.put('/api/user/experiance', addExperiance);
+app.put('/api/user/:id/coverPic', addCoverPic);
+app.put('/api/user/:id/profilePic', addProfilePic);
 app.put('/api/user/education', addEducation);
 app.put('/api/posts/likes/:id', addLikes);
 app.put('/api/posts/unlikes/:id', addUnlikes);

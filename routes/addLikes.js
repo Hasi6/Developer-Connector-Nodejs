@@ -4,23 +4,22 @@ const addLikes = async (req, res) => {
   const postId = req.params.id;
   const userId = req.session.userId;
 
-  if(userId == undefined || userId == null){
-      return res.send('You Need to logged in first');
+  if(!userId){
+      return res.render('signup', {msg: 'Unauthorized Action', type: 'danger'});
   }
 
+  backURL=req.header('Referer') || '/';
+
   try{
-        
     const post = await Post.findById(postId);
 
     if(!post){
-        return res.send('No Post Found');
+        return res.redirect(`${backURL}`);
     }
 
     if(post.likes.filter(like => like.user.toString() === userId).length > 0 ){
-        return res.send('Already Liked this Post');
+        return res.redirect(`${backURL}`);
     }
-
-    
 
     post.likes.unshift({ user: userId });
 
@@ -30,7 +29,7 @@ const addLikes = async (req, res) => {
 
     await post.save();
 
-    return res.send(post.likes);
+    return res.redirect(`${backURL}`);
 
   }catch(err){
       console.error(err.message);

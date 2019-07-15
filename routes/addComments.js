@@ -1,4 +1,6 @@
 const Post = require("../models/Post");
+const Comments = require("../models/Comments");
+const User = require("../models/User");
 
 const addComment = async (req, res) => {
   const userId = req.session.userId;
@@ -7,25 +9,29 @@ const addComment = async (req, res) => {
   try {
     const text = req.body.text;
 
+    backURL=req.header('Referer') || '/';
+
     const post = await Post.findById(postId);
 
     if (!post) {
       return res.send("No Post found");
     }
 
-    const newComment = {
-      user: userId,
-      text
-    };
+    const username = await User.findById(userId);
 
-    await post.comments.unshift(newComment);
-    const success = await post.save();
+    const comment = new Comments({
+      user: username.username,
+      post: postId,
+      text
+    });
+
+    const success = await comment.save();
 
     if (!success) {
       return res.send("Server Error");
     }
 
-    return res.send(newComment);
+    return res.redirect(backURL);
     
   } catch (err) {
     console.error(err.message);

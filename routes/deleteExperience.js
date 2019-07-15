@@ -8,7 +8,7 @@ const DeleteExperiance = async (req, res)=>{
         const profile = await Profile.findOne({user: id});
 
         if(!profile){
-            return res.send('No Profils Found');
+            return res.send('No Profiles Found');
         }
 
         // get remove exprience

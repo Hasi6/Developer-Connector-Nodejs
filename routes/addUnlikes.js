@@ -4,8 +4,10 @@ const addUnlikes = async (req, res) => {
   const postId = req.params.id;
   const userId = req.session.userId;
 
+  backURL=req.header('Referer') || '/';
+
   if(userId == undefined || userId == null){
-      return res.send('You Need to logged in first');
+      return res.render('signup',{ msg: 'You Need to logged in first', type: 'danger'});
   }
 
   try{
@@ -13,11 +15,11 @@ const addUnlikes = async (req, res) => {
     const post = await Post.findById(postId);
 
     if(!post){
-        return res.send('No Post Found');
+        return res.render(`${backURL}`);
     }
 
     if(post.unlikes.filter(unlike => unlike.user.toString() === userId).length > 0 ){
-        return res.send('Already Unliked this Post');
+        return res.render(`${backURL}`);
     }
 
     post.unlikes.unshift({ user: userId });
@@ -28,7 +30,7 @@ const addUnlikes = async (req, res) => {
 
     await post.save();
 
-    return res.send(post.unlikes);
+    return res.redirect(`${backURL}`)
 
   }catch(err){
       console.error(err.message);
