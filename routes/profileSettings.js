@@ -13,8 +13,11 @@ const profileSettings = async(req, res) => {
         return res.redirect(backURL);
     }
 
+    let social = user.social
+
     return res.render('profileSettings',{
-        loggedUser: loggedUser
+        loggedUser: loggedUser,
+        social: social
     })
 }catch(err){
     console.error(err.message);

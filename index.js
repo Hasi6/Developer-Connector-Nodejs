@@ -84,7 +84,7 @@ app.get("/api/profile/github/:username", githubUsername);
 app.get("/api/posts", getPosts);
 app.get("/api/logout", logout);
 app.get("/api/singlePost/:id", singlePost);
-app.get("/api/profile/settings/:userId", profileSettings);
+app.get("/api/myProfile/settings/:userId", profileSettings);
 
 app.get('*', (req, res)=>{
   return res.send('No page Found');
