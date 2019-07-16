@@ -1,4 +1,4 @@
-const Profile = require("../models/Profile");
+const User = require("../models/User");
 
 const addEducation = async (req, res) => {
   const id = req.session.userId;
@@ -16,17 +16,14 @@ const addEducation = async (req, res) => {
   };
 
   try {
-    const profile = await Profile.findOne({ user: id });
+    const user = await User.findOne({ user: id });
 
-    console.log(id);
-
-    if (!profile) {
+    if (!user) {
       return res.send("No User Found");
     }
 
-    await profile.education.unshift(newEdu);
-    await profile.save();
-    console.log(profile.education);
+    await user.education.unshift(newEdu);
+    await user.save();
 
     return res.send(newEdu);
   } catch (err) {

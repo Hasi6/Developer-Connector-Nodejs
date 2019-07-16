@@ -49,6 +49,7 @@ const userConfirm = require("./routes/userConfirm");
 const userProfile = require("./routes/userProfile");
 const allProfiles = require("./routes/getAllProfiles");
 const oneProfile = require("./routes/getOneProfile");
+const myProfile = require("./routes/getMyProfile")
 const deleteUser = require("./routes/deleteUser");
 const deleteProfile = require("./routes/deleteProfile");
 const addExperiance = require("./routes/addExperiance");
@@ -67,6 +68,8 @@ const deleteComments = require("./routes/deleteComments");
 const logout = require('./routes/logout');
 const addCoverPic = require('./routes/addCoverPic');
 const addProfilePic = require('./routes/addProfilePic');
+const addSocialMedia = require('./routes/addSocialMedia');
+const profileSettings = require('./routes/profileSettings');
 
 // Middlewares
 const registerAuth = require('./middleware/userRegisterAuth');
@@ -76,10 +79,12 @@ const loginAuth = require('./middleware/userLoginAuth');
 app.get("/", signup);
 app.get("/api/profiles/:page", allProfiles);
 app.get("/api/profile/:userId", oneProfile);
+app.get("/api/myProfile/:userId", myProfile);
 app.get("/api/profile/github/:username", githubUsername);
 app.get("/api/posts", getPosts);
 app.get("/api/logout", logout);
 app.get("/api/singlePost/:id", singlePost);
+app.get("/api/profile/settings/:userId", profileSettings);
 
 app.get('*', (req, res)=>{
   return res.send('No page Found');
@@ -92,6 +97,7 @@ app.post("/api/userConfirm", userConfirm);
 app.post("/api/userProfile", userProfile);
 app.post("/api/posts", addPosts);
 app.post("/api/post/:id/comments", addComments);
+app.post("/api/userProfile/:id/social", addSocialMedia);
 
 app.post('*', (req, res)=>{
   return res.send('No page Found');

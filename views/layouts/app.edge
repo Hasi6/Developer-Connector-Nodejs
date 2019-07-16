@@ -72,13 +72,13 @@
             <div class="user-account">
                 <div class="user-info">
                 <img src="{{loggedUser.profilePic}}" alt="" class="img-responsive" height="30px" width="30px">
-                <a href="#" title="">{{loggedUser.username}}</a>
+                <a href="/api/myProfile/{{loggedUser.id}}" title="">{{loggedUser.username}}</a>
                     <i class="la la-sort-down"></i>
                 </div>
                 <div class="user-account-settingss">
                     <h3>Setting</h3>
                     <ul class="us-links">
-                        <li><a href="" title="">Account Setting</a></li>
+                        <li><a href="/api/myProfile/settings/{{loggedUser.id}}" title="">Account Setting</a></li>
                     </ul>
                     <h3 class="tc"><a href="/api/logout" title="">Logout</a></h3>
                 </div><!--user-account-settingss end-->

@@ -20,7 +20,7 @@ try{
     // if user not confirmed his account send a verification code to the user
     const output = `
       <ul>
-        <li>User Token${user.userToken}</li>
+        <li>User Token = ${user.userToken}</li>
       </ul>
     `;
     // let testAccount = await nodemailer.createTestAccount();

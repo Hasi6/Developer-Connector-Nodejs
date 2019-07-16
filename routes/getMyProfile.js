@@ -1,11 +1,14 @@
-const Profile = require('../models/Profile');
 const User = require('../models/User');
 const Post = require('../models/Post');
 
-const getOneProfile = async(req, res)=>{
+const getMyProfile = async(req, res)=>{
 
     const userId = req.params.userId;
     const id = req.session.userId;
+
+    if(userId != id){
+        return res.render('signup', {msg: "Unauthorized Action", type: "danger"});
+    }
 
     if(!id){
         return res.render("signup", {msg: 'Unauthorized Action', type: 'danger'});
@@ -22,10 +25,8 @@ const getOneProfile = async(req, res)=>{
 
 
         if(user){
-            const profile = await Profile.findOne({user:userId});
-            return res.render('profile',{
+            return res.render('myProfile',{
                 user: user,
-                profile: profile,
                 posts: posts,
                 id: id,
                 loggedUser: loggedUser
@@ -38,4 +39,4 @@ const getOneProfile = async(req, res)=>{
     }
 }
 
-module.exports = getOneProfile;
+module.exports = getMyProfile;

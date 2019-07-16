@@ -17,7 +17,7 @@ const userConfirm = async (req, res)=>{
     if(user.userToken == userToken ){
         req.session.userId = user._id;
         await User.findOneAndUpdate({email: email}, { $set: {confirmed : true}});
-        return res.redirect(`/api/profile/${req.session.userId}`);
+        return res.redirect(`/api/myProfile/${req.session.userId}`);
     }
     return res.render('confirm', {msg: 'Invalid Token', type: 'danger'});
 }catch(err){

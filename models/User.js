@@ -40,7 +40,107 @@ const UsersSchema = new mongoose.Schema({
     coverPic: {
         type: String,
         default:"/images/cover.jpg"
-    }
+    },
+    company: {
+        type: String
+      },
+      website: {
+        type: String
+      },
+      location: {
+        type: String
+      },
+      status: {
+        type: String,
+      },
+      skills: {
+        type: [String],
+      },
+      bio: {
+        type: String
+      },
+      githubusername: {
+        type: String
+      },
+      exprience: [
+        {
+          title: {
+            type: String,
+            required: true
+          },
+          company:{
+              type: String,
+              required: true
+          },
+          location: {
+              type: String,
+              required: true
+          },
+          from:{
+              type: Date,
+              required: true
+          },
+          to:{
+            type: Date,
+            required: true
+          },
+          current: {
+              type: Boolean,
+              required: true
+          },
+          description: {
+              type: String,
+              required: true
+          }
+        }
+      ],
+      education: [
+        {
+          school: {
+            type: String,
+            required: true
+          },
+          degree: {
+            type: String,
+            required: true
+          },
+          fieldofstudy: {
+            type: String,
+            required: true
+          },
+          from: {
+            type: Date,
+            required: true
+          },
+          to: {
+            type: Date
+          },
+          current: {
+            type: Boolean,
+            default: false
+          },
+          description: {
+            type: String
+          }
+        }
+      ],
+      social: {
+        youtube: {
+          type: String
+        },
+        twitter: {
+          type: String
+        },
+        facebook: {
+          type: String
+        },
+        linkedin: {
+          type: String
+        },
+        instagram: {
+          type: String
+        }
+      }
 });
 
 const Users = mongoose.model('Users', UsersSchema);

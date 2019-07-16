@@ -6,7 +6,7 @@ const userLogin = async (req, res) => {
 try{
   const user = await User.findOne({ email: email });
   req.session.userId = user._id;
-  return res.redirect(`/api/profile/${req.session.userId}`);
+  return res.redirect(`/api/myProfile/${req.session.userId}`);
 }catch(err){
   console.error(err.message);
 }

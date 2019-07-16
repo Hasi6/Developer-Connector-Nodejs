@@ -1,24 +1,24 @@
-const Profile = require('../models/Profile');
+const User = require('../models/User');
 
 const DeleteExperiance = async (req, res)=>{
     const id = req.session.userId;
     const expId = req.params.id;
 
     try{
-        const profile = await Profile.findOne({user: id});
+        const user = await User.findOne({user: id});
 
-        if(!profile){
-            return res.send('No Profiles Found');
+        if(!user){
+            return res.send('No users Found');
         }
 
         // get remove exprience
-        const exp_index = await profile.exprience.map(item => item.id).indexOf(expId);
+        const exp_index = await user.exprience.map(item => item.id).indexOf(expId);
 
-        await profile.exprience.splice(exp_index, 1);
+        await user.exprience.splice(exp_index, 1);
 
-        await profile.save();
+        await user.save();
 
-        return res.send(profile);
+        return res.send(user);
 
     }catch(err){
         console.error(err.message);

@@ -1,4 +1,4 @@
-const Profile = require("../models/Profile");
+const User = require("../models/User");
 
 const addExperiance = async (req, res) => {
   const id = req.session.userId;
@@ -16,15 +16,15 @@ const addExperiance = async (req, res) => {
   };
 
   try {
-    const profile = await Profile.findOne({ user: id });
+    const user = await User.findOne({ user: id });
 
-    if (!profile) {
+    if (!user) {
       return res.send("No User Found");
     }
 
-    await profile.exprience.unshift(newExp);
-    await profile.save();
-    console.log(profile.exprience);
+    await user.exprience.unshift(newExp);
+    await user.save();
+    console.log(user.exprience);
 
     return res.send(newExp);
   } catch (err) {

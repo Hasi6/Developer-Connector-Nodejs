@@ -1,24 +1,24 @@
-const Profile = require('../models/Profile');
+const User = require('../models/User');
 
 const DeleteEducation = async (req, res)=>{
     const id = req.session.userId;
     const eduId = req.params.id;
 
     try{
-        const profile = await Profile.findOne({user: id});
+        const user = await User.findOne({user: id});
 
-        if (!profile) {
+        if (!user) {
             return res.send("No User Found");
           }
 
         // get remove exprience
-        const edu_index = await profile.education.map(item => item.id).indexOf(eduId);
+        const edu_index = await user.education.map(item => item.id).indexOf(eduId);
 
-        await profile.education.splice(edu_index, 1);
+        await user.education.splice(edu_index, 1);
 
-        await profile.save();
+        await user.save();
 
-        return res.send(profile);
+        return res.send(user);
 
     }catch(err){
         console.error(err.message);
