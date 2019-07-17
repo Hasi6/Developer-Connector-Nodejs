@@ -1,7 +1,15 @@
 @layout('layouts.app')
 
 @section('content')
+		@if(msg)
+		<h2 id="msg" class="alert alert-{{type}}">{{msg}}</h2>
+		@endif
 
+		<script>
+			setTimeout(()=>{
+				$('#msg').hide();
+			}, 5000);
+		</script>
 <section class="profile-account-setting">
 			<div class="container">
 				<div class="account-tabs-setting">
@@ -10,7 +18,8 @@
 							<div class="acc-leftbar">
 								<div class="nav nav-tabs" id="nav-tab" role="tablist">
 								    <a class="nav-item nav-link active" id="nav-password-tab" data-toggle="tab" href="#nav-password" role="tab" aria-controls="nav-password" aria-selected="false"><i class="fa fa-globe"></i>Add Social Links</a>
-								    <a class="nav-item nav-link" id="nav-deactivate-tab" data-toggle="tab" href="#nav-deactivate" role="tab" aria-controls="nav-deactivate" aria-selected="false"><i class="fa fa-random"></i>Deactivate Account</a>
+									<a class="nav-item nav-link" id="nav-status-tab" data-toggle="tab" href="#nav-status" role="tab" aria-controls="nav-status" aria-selected="false"><i class="fa fa-line-chart"></i>Add Education</a>
+									<a class="nav-item nav-link" id="nav-deactivate-tab" data-toggle="tab" href="#nav-deactivate" role="tab" aria-controls="nav-deactivate" aria-selected="false"><i class="fa fa-random"></i>Deactivate Account</a>
 								  </div>
 							</div><!--acc-leftbar end-->
 						</div>
@@ -18,7 +27,7 @@
 							<div class="tab-content" id="nav-tabContent">
 							  	<div class="tab-pane fade active" id="nav-password" role="tabpanel" aria-labelledby="nav-password-tab">
 							  		<div class="acc-setting">
-										<h3>Account Setting</h3>
+										<h3>Add Socila Media</h3>
                                       <form action="/api/userProfile/{{loggedUser.id}}/social" method="POST">
 											<div class="cp-field">
 												<h5>Youtube</h5>
@@ -106,6 +115,62 @@
 										</form>
 									</div><!--acc-setting end-->
 							  	</div>
+							</div>
+							<div class="tab-pane fade" id="nav-status" role="tabpanel" aria-labelledby="nav-status-tab">
+								<div class="acc-setting">
+								  <h3>Add Education Media</h3>
+								<form action="/api/user/education?_method=PUT" method="POST">
+									  <div class="cp-field">
+										  <h5>School</h5>
+										  <div class="cpp-fiel">
+											  <input type="text" name="school" placeholder="Your School">
+											  <i class="fa fa-school"></i>
+										  </div>
+									  </div>
+									  <div class="cp-field">
+										  <h5>Degree</h5>
+										  <div class="cpp-fiel">
+											  <input type="text" name="degree" placeholder="Your Degree">
+											  <i class="fa fa-degree"></i>
+										  </div>
+									  </div>
+									  <div class="cp-field">
+										  <h5>Education Field</h5>
+										  <div class="cpp-fiel">
+											  <input type="text" name="fieldofstudy" placeholder="Your Education Field">
+											  <i class="fa fa-facebook"></i>
+										  </div>
+									  </div>
+									  <div class="cp-field">
+										  <h5>From</h5>
+										  <div class="cpp-fiel">
+											  <input type="date" name="from">
+											  <i class="fa fa-linkedin"></i>
+										  </div>
+									  </div>
+									  <div class="cp-field">
+										<h5>To</h5>
+										<div class="cpp-fiel">
+											<input type="date" name="to">
+											<i class="fa fa-linkedin"></i>
+										</div>
+									</div>
+									  <div class="cp-field">
+										  <h5>Discription</h5>
+										  <div class="cpp-fiel">
+											  <input type="text" name="description" placeholder="School Description">
+											  <i class="fa fa-instagram"></i>
+										  </div>
+									  </div>
+									  
+									  <div class="save-stngs pd2">
+										  <ul>
+											  <li><button type="submit" name="_method">Save</button></li>
+											  <li><button type="reset">Reset</button></li>
+										  </ul>
+									  </div><!--save-stngs end-->
+								  </form>
+							  </div><!--acc-setting end-->
 							</div>
 						</div>
 					</div>

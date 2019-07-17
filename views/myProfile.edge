@@ -76,19 +76,19 @@
                                             </div><!--user-pro-img end-->
 
                                             <ul class="social_links">
-                                                @if(user.social.youtube)
+                                                @if(user.social.youtube && user.social.youtube != "undefined")
                                                     <li><a href="#" title=""><i class="fa fa-youtube"></i>{{user.social.youtube}}</a></li>
                                                 @endif
-                                                @if(user.social.twitter)
+                                                @if(user.social.twitter && user.social.twitter != "undefined")
                                                     <li><a href="#" title=""><i class="fa fa-twitter"></i>{{user.social.twitter}}</a></li>
                                                 @endif
-                                                @if(user.social.facebook)
+                                                @if(user.social.facebook && user.social.facebook != "undefined")
                                                     <li><a href="#" title=""><i class="fa fa-facebook"></i>{{user.social.facebook}}</a></li>
                                                 @endif
-                                                @if(user.social.linkedin)
+                                                @if(user.social.linkedin && user.social.linkedin != "undefined")
                                                     <li><a href="#" title=""><i class="fa fa-linkedin"></i>{{user.social.linkedin}}</a></li>
                                                 @endif
-                                                @if(user.social.instagram)
+                                                @if(user.social.instagram && user.social.instagram != "undefined")
                                                     <li><a href="#" title=""><i class="fa fa-instagram"></i>{{user.social.instagram}}</a></li>
                                                 @endif
                                             </ul>
@@ -105,6 +105,25 @@
                                                         <h4>Jessica William</h4>
                                                         <span>Graphic Designer</span>
                                                     </div>
+                                                    <span><i class="la la-plus"></i></span>
+                                                </div>
+                                            </div><!--suggestions-list end-->
+                                        </div><!--suggestions end-->
+
+                                        <div class="suggestions full-width">
+                                            <div class="sd-title">
+                                                <h3>Education</h3>
+                                                <i class="la la-ellipsis-v"></i>
+                                            </div><!--sd-title end-->
+                                            <div class="suggestions-list">
+                                                <div class="suggestion-usd">
+                                                    @each(user in userEdu )
+                                                    <div class="sgt-text">
+                                                    <h4>{{user.school}}</h4>
+                                                    <hr>
+                                                    {{--  <span>Degree: {{users.education[0].degree}}</span>  --}}
+                                                    </div>
+                                                    @endeach
                                                     <span><i class="la la-plus"></i></span>
                                                 </div>
                                             </div><!--suggestions-list end-->

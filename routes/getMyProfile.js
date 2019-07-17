@@ -14,22 +14,21 @@ const getMyProfile = async(req, res)=>{
         return res.render("signup", {msg: 'Unauthorized Action', type: 'danger'});
     }
 
-    
-
     try{
         const user = await User.findById(userId);
         const loggedUser = await User.findById(id);
         const posts = await Post.find({user: userId});
+        const userEdu = user.education;
+        const userEduSize = userEdu.length;
 
-        console.log(user.social);
-
-
+        console.log(userEdu.length);
         if(user){
             return res.render('myProfile',{
                 user: user,
                 posts: posts,
                 id: id,
-                loggedUser: loggedUser
+                loggedUser: loggedUser,
+                userEdu: userEdu
             });
         }
         return res.send('No User Found');

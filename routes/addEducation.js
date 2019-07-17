@@ -3,7 +3,11 @@ const User = require("../models/User");
 const addEducation = async (req, res) => {
   const id = req.session.userId;
 
-  const { school, degree, fieldofstudy, from, to, current, description } = req.body;
+  if(!id){
+    return res.render('signup', {msg: "Unauthorized Action", type: "danger"});
+  }
+
+  const { school, degree, fieldofstudy, from, to, description } = req.body;
 
   const newEdu = {
     school,
@@ -11,21 +15,19 @@ const addEducation = async (req, res) => {
     fieldofstudy,
     from,
     to,
-    current,
     description
   };
 
   try {
-    const user = await User.findOne({ user: id });
-
+    const user = await User.findById(id);
     if (!user) {
-      return res.send("No User Found");
+      return res.render("signup", {msg: 'Unauthorized Action', type: 'danger'});
     }
 
     await user.education.unshift(newEdu);
     await user.save();
 
-    return res.send(newEdu);
+    return res.render("profileSettings", {msg: "Update Successfully", type: 'success'});
   } catch (err) {
     console.error(err.message);
   }
