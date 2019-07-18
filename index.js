@@ -70,6 +70,10 @@ const addCoverPic = require('./routes/addCoverPic');
 const addProfilePic = require('./routes/addProfilePic');
 const addSocialMedia = require('./routes/addSocialMedia');
 const profileSettings = require('./routes/profileSettings');
+const fpassword = require('./routes/fpassword');
+const tokenConfirm = require('./routes/tokenConfirm');
+const resetPassword = require('./routes/resetPassword');
+const reset = require('./routes/reset');
 
 // Middlewares
 const registerAuth = require('./middleware/userRegisterAuth');
@@ -85,7 +89,7 @@ app.get("/api/posts", getPosts);
 app.get("/api/logout", logout);
 app.get("/api/singlePost/:id", singlePost);
 app.get("/api/myProfile/settings/:userId", profileSettings);
-
+app.get("/api/resetPassword/:userId", resetPassword);
 app.get('*', (req, res)=>{
   return res.send('No page Found');
 })
@@ -98,6 +102,9 @@ app.post("/api/userProfile", userProfile);
 app.post("/api/posts", addPosts);
 app.post("/api/post/:id/comments", addComments);
 app.post("/api/userProfile/:id/social", addSocialMedia);
+app.post("/api/fpassword", fpassword);
+app.post("/api/tokenConfirm/:userId", tokenConfirm);
+
 
 app.post('*', (req, res)=>{
   return res.send('No page Found');
@@ -122,12 +129,12 @@ app.put('/api/user/:id/profilePic', addProfilePic);
 app.put('/api/user/education', addEducation);
 app.put('/api/posts/likes/:id', addLikes);
 app.put('/api/posts/unlikes/:id', addUnlikes);
-
+app.put("/api/resetPassword/:userId", reset);
 app.put('*', (req, res)=>{
   return res.send('No page Found');
 })
 
-const port = 5000;
+const port = process.env.PORT || 5000;
 
 app.listen(port, (req, res) => {
   console.log(`Server Started at Port ${port}`);

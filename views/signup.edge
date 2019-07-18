@@ -104,16 +104,16 @@
 								<div class="sign_in_sec" id="tab-5">
 									
 									<h3>Forget Password</h3>
-									<form action="" method="POST">
+									<form action="/api/fpassword" method="POST">
 										<div class="row">
 											<div class="col-lg-12 no-pdd">
 												<div class="sn-field">
-													<input type="text" name="email" placeholder="Enter Your Email">
+													<input type="email" name="email" placeholder="Enter Your Email" required>
 													<i class="la la-envelope"></i>
 												</div><!--sn-field end-->
 											</div>
 											<div class="col-lg-12 no-pdd">
-												<button type="submit" value="submit">Send Token to Email</button>
+												<button type="submit" name="submit">Send Token to Email</button>
 											</div>
 										</div>
 									</form>
