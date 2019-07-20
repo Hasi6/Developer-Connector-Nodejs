@@ -7,13 +7,16 @@ const PostSchema = new Schema({
         type: Schema.Types.ObjectId,
         required: true
     },
-    text: {
+    title: {
         type: String,
         required: true
     },
-    name:{
+    body:{
         type: String,
         required: true
+    },
+    image: {
+        type: String,
     },
     // likes:[
     //     {

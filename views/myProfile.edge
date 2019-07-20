@@ -132,18 +132,34 @@
                                 </div>
                                 <div class="col-lg-6">
                                     <div class="main-ws-sec">
-                                        @if(profile)
-                                        <div class="user-tab-sec">
-                                        <h3>{{profile.name}}</h3>
-                                            <div class="star-descp">
-                                            <span>{{profile.status}}</span>
-                                            </div><!--star-descp end-->
-                                        </div><!--user-tab-sec end-->
-                                        @else
                                         <div class="user-tab-sec">
                                             <h3>{{user.username}}</h3>
                                         </div><!--user-tab-sec end-->
-                                        @endif
+                                <div class="acc-setting">
+                                    <h3>Create A New Post</h3>
+                                    <form action="/api/posts" method="POST">
+                                        <div class="cp-field">
+                                            <h5>Title</h5>
+                                            <div class="cpp-fiel">
+                                                <input type="text" name="title" placeholder="Post Title">
+                                                <i class="fa fa-school"></i>
+                                            </div>
+                                        </div>
+                                        <div class="cp-field">
+                                            <h5>Body</h5>
+                                            <div class="cpp-fiel">
+                                                <textarea type="text" name="body" placeholder="Post Body"></textarea>
+                                                <i class="fa fa-degree"></i>
+                                            </div>
+                                        </div>
+                                        <div class="save-stngs pd2">
+                                            <ul>
+                                                <li><button type="submit">Add Post</button></li>
+                                                <li><button type="reset">Reset</button></li>
+                                            </ul>
+                                        </div><!--save-stngs end-->
+                                    </form>
+							  </div><!--acc-setting end-->
                                         <div class="product-feed-tab current" id="feed-dd">
                                             <div class="posts-section">
                                             @each(post in posts)
@@ -152,7 +168,7 @@
                                                         <div class="usy-dt">
                                                             <img src="http://via.placeholder.com/50x50" alt="">
                                                             <div class="usy-name">
-                                                            <h3>{{profile.name}}</h3>
+                                                            <h3>{{user.username}}</h3>
                                                             <span><img src="" alt="">{{post.date}}</span>
                                                             </div>
                                                         </div>
@@ -170,12 +186,12 @@
                                                         </ul>
                                                     </div>
                                                     <div class="job_descp">
-                                                    <h3>{{post.name}}</h3>
+                                                    <h3>{{post.title}}</h3>
                                                         <ul class="job-dt">
                                                             <li><a href="#" title="">Full Time</a></li>
                                                             <li><span>$30 / hr</span></li>
                                                         </ul>
-                                                        <p>{{post.text}}</p>
+                                                        <p>{{post.body}}</p>
                                                     </div>
                                                     <div class="job-status-bar">
                                                         <ul class="like-com">

@@ -4,23 +4,35 @@ const Post = require('../models/Post');
 const addPost = async (req, res)=>{
     const id = req.session.userId;
 
-    const { name, text } = req.body;
+    const { title, body } = req.body;
+
+    backURL=req.header('Referer') || '/';
 
     if(!id == null){
-        return res.send('You Need To log First');
+        return res.render('signup',{msg: 'You Need To log First', type: 'danger'});
+    }
+    try{
+
+    const user = await User.findById(id);
+
+    if(!user){
+        return res.render('signup',{msg: 'You Need To log First', type: 'danger'});
     }
 
     const post = new Post({
         user: id,
-        name,
-        text
+        title,
+        body
     });
 
     const save = await post.save();
     if(!save){
         return res.send('Server Error')
     }
-    return res.send(post);
+    return res.redirect(backURL);
+}catch(err){
+    console.error(err.message);
+}
 
 }
 

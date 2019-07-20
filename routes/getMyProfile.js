@@ -17,7 +17,7 @@ const getMyProfile = async(req, res)=>{
     try{
         const user = await User.findById(userId);
         const loggedUser = await User.findById(id);
-        const posts = await Post.find({user: userId});
+        const posts = await Post.find({user: userId}).sort({date: -1}).limit(10);
         const userEdu = user.education;
         const userEduSize = userEdu.length;
 
