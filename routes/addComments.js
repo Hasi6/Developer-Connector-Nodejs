@@ -1,5 +1,4 @@
 const Post = require("../models/Post");
-const Comments = require("../models/Comments");
 const User = require("../models/User");
 
 const addComment = async (req, res) => {
@@ -17,15 +16,17 @@ const addComment = async (req, res) => {
       return res.send("No Post found");
     }
 
-    const username = await User.findById(userId);
+    const user = await User.findById(userId);
 
-    const comment = new Comments({
-      user: username.username,
+    let comment = {
+      user: user.username,
+      userImage: user.profilePic,
       post: postId,
       text
-    });
-
-    const success = await comment.save();
+    };
+    console.log(post)
+    post.comments.unshift(comment);
+    const success = await post.save();
 
     if (!success) {
       return res.send("Server Error");

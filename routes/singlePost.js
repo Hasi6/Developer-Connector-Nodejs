@@ -6,14 +6,12 @@ const Unlikes = require('../models/Unlikes');
 
 const singlePost = async(req, res) => {
     postId = req.params.id;
+    const userId = req.session.userId;
 
     try{
     const post = await Post.findById(postId);
-    const comments = await Comments.find({post: postId});
-    const commentsCount = await Comments.find({post: postId}).countDocuments();
-    const likesCount = await Likes.find({post:postId}).countDocuments();
-    const unlikesCount = await Unlikes.find({post:postId}).countDocuments();
     const user = await User.findById(post.user);
+    const loggedUser = await User.findById(userId);
 
     backURL=req.header('Referer') || '/';
 
@@ -24,10 +22,10 @@ const singlePost = async(req, res) => {
     return res.render('singlePost', {
         post: post,
         user: user,
-        comments: comments,
-        commentsCount: commentsCount,
-        likesCount: likesCount,
-        unlikesCount: unlikesCount
+        loggedUser: loggedUser,
+        comments: post.comments,
+        likesCount: post.likes,
+        unlikesCount: post.unlikes
     })
 }catch(err){
     console.error(err.message);
