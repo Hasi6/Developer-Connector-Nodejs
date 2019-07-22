@@ -36,22 +36,19 @@
                         <div class="forum-post-view">
                             <div class="usr-question">
                                 <div class="usr_img">
-                                    <img src="http://via.placeholder.com/60x60" alt="">
+                                <img src="{{user.profilePic}}" alt="" width="50px" height="50px">
                                 </div>
                                 <div class="usr_quest">
-                                <h3>{{post.name}}</h3>
+                                <h3>{{user.username}}</h3>
                                 <span><i class="fa fa-clock-o"></i>{{post.date}}</span>
-                                    <ul class="react-links">
-                                    <li><a href="#" title=""><i class="fa fa-heart"></i>{{likesCount}} Likes </a></li>
-                                    </ul>
-                                    <ul class="quest-tags">
-                                        <li><a href="#" title="">Work</a></li>
-                                        <li><a href="#" title="">Php</a></li>
-                                        <li><a href="#" title="">Design</a></li>
-                                    </ul>
-                                    <p>{{post.text}}</p>
+                                <h2>{{post.title}}</h2>
+                                <ul class="react-links">
+                                <li><a href="/api/posts/likes/{{post._id}}" title=""><i class="fa fa-heart"></i>{{post.likes.length}} Likes </a></li>
+                                <li><a href="/api/posts/unlikes/{{post._id}}" title=""><i class="fa fa-heart"></i>{{post.unlikes.length}} Unlikes </a></li>
+                                </ul>
+                                    <p>{{post.body}}</p>
                                     <div class="comment-section">
-                                        <h3>{{commentsCount}} Comments</h3>
+                                        <h3>{{post.comments.length}} Comments</h3>
                                         <div class="comment-sec">
                                             <div>
                                             <ul>
@@ -59,13 +56,20 @@
                                                 <li>
                                                     <div class="comment-list">
                                                         <div class="bg-img">
-                                                            <img src="http://via.placeholder.com/40x40" alt="">
+                                                        <img src="{{comment.userImage}}" alt="" width="50px" height="50px">
                                                         </div>
                                                         <div class="comment">
                                                         <h3>{{comment.user}}</h3>
                                                         <span><img src="images/clock.png" alt="">{{comment.date}}</span>
                                                             <p>{{comment.text}}</p>
                                                         </div>
+                                                        @if(post.user == loggedUser.id)
+                                                            <div class="delete">
+                                                            <form action="/api/post/{{post.id}}/comments/{{comment.id}}?_method=DELETE" method="POST">
+                                                                    <button class="btn btn-danger" name="_method" type="submit" style="cursor: pointer">Delete Comment</button>
+                                                                </form>
+                                                            </div>
+                                                        @endif
                                                     </div><!--comment-list end-->
                                                 </li>
                                                 @endeach
@@ -77,10 +81,10 @@
                             </div><!--usr-question end-->
                         </div><!--forum-post-view end-->
                         <div class="post-comment-box">
-                        <h3>{{commentsCount}} comments</h3>
+                        <h3>{{post.comments.length}} comments</h3>
                             <div class="user-poster">
                                 <div class="usr-post-img">
-                                    <img src="http://via.placeholder.com/40x40" alt="">
+                                <img src="{{loggedUser.profilePic}}" alt="" width="50px" height="50px">
                                 </div>
                                 <div class="post_comment_sec">
                                 <form action="/api/post/{{post.id}}/comments" method="POST">

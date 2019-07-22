@@ -21,7 +21,7 @@ const PostSchema = new Schema({
     likes:[
         {
             user:{
-                type: String,
+                type: Schema.Types.ObjectId,
                 required: true
             }
         }
@@ -29,7 +29,7 @@ const PostSchema = new Schema({
     unlikes:[
         {
             user:{
-                type: String,
+                type: Schema.Types.ObjectId,
                 required: true
             }
         }

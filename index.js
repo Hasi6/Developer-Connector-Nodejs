@@ -90,6 +90,8 @@ app.get("/api/logout", logout);
 app.get("/api/singlePost/:id", singlePost);
 app.get("/api/myProfile/settings/:userId", profileSettings);
 app.get("/api/resetPassword/:userId", resetPassword);
+app.get('/api/posts/likes/:id', addLikes);
+app.get('/api/posts/unlikes/:id', addUnlikes);
 app.get('*', (req, res)=>{
   return res.send('No page Found');
 })
@@ -127,8 +129,6 @@ app.put('/api/user/experiance', addExperiance);
 app.put('/api/user/:id/coverPic', addCoverPic);
 app.put('/api/user/:id/profilePic', addProfilePic);
 app.put('/api/user/education', addEducation);
-app.put('/api/posts/likes/:id', addLikes);
-app.put('/api/posts/unlikes/:id', addUnlikes);
 app.put("/api/resetPassword/:userId", reset);
 app.put('*', (req, res)=>{
   return res.send('No page Found');

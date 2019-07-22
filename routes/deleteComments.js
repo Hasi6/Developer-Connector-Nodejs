@@ -15,8 +15,7 @@ const deletePost = async (req, res)=>{
         }
 
         const comment = post.comments.find(comment => comment.id === commentId);
-
-        console.log(comment);
+        backURL=req.header('Referer') || '/';
 
         if(!comment){
             return res.send('No Comments Found');
@@ -31,7 +30,7 @@ const deletePost = async (req, res)=>{
 
             await post.save();
 
-           return res.send('Comment is Deleted');
+           return res.redirect(backURL);
        }
 
        return res.send('You can\'t Delete this comment');

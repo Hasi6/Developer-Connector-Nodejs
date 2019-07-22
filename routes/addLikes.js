@@ -29,7 +29,7 @@ const addLikes = async (req, res) => {
 
     await post.save();
 
-    return res.redirect(`${backURL}`);
+    return res.redirect(backURL);
 
   }catch(err){
       console.error(err.message);
