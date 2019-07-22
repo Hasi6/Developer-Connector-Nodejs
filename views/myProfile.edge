@@ -136,8 +136,9 @@
                                             <h3>{{user.username}}</h3>
                                         </div><!--user-tab-sec end-->
                                 <div class="acc-setting">
-                                    <h3>Create A New Post</h3>
-                                    <form action="/api/posts" method="POST">
+                                    <h3 style="cursor: pointer" onclick="displayCreatePost()">Create A New Post</h3>
+                                    <div id="createPost" style="display: none">
+                                    <form action="/api/posts" method="POST" enctype="multipart/form-data">
                                         <div class="cp-field">
                                             <h5>Title</h5>
                                             <div class="cpp-fiel">
@@ -151,6 +152,11 @@
                                                 <textarea type="text" name="body" placeholder="Post Body"></textarea>
                                                 <i class="fa fa-degree"></i>
                                             </div>
+                                            <h5>Image</h5>
+                                            <div class="cpp-fiel">
+                                                <input type="file" name="image" class="form-control">
+                                                <i class="fa fa-school"></i>
+                                            </div>
                                         </div>
                                         <div class="save-stngs pd2">
                                             <ul>
@@ -159,14 +165,22 @@
                                             </ul>
                                         </div><!--save-stngs end-->
                                     </form>
-							  </div><!--acc-setting end-->
+                                </div>
+                              </div><!--acc-setting end-->
+                            
+                              <script>
+                                  function displayCreatePost(){
+                                    $('#createPost').fadeToggle();
+                                  }
+                              </script>
+
                                         <div class="product-feed-tab current" id="feed-dd">
                                             <div class="posts-section">
                                             @each(post in posts)
                                                 <div class="post-bar">
                                                     <div class="post_topbar">
                                                         <div class="usy-dt">
-                                                            <img src="http://via.placeholder.com/50x50" alt="">
+                                                        <img src="{{user.profilePic}}" alt="" width="50px" height="50px">
                                                             <div class="usy-name">
                                                             <h3>{{user.username}}</h3>
                                                             <span><img src="" alt="">{{post.date}}</span>
@@ -191,6 +205,7 @@
                                                             <li><a href="#" title="">Full Time</a></li>
                                                             <li><span>$30 / hr</span></li>
                                                         </ul>
+                                                    <img src="{{post.image}}" alt="" width="500px">
                                                         <p>{{post.body}}</p>
                                                     </div>
                                                     <div class="job-status-bar">
@@ -242,9 +257,27 @@
                                             };
                                         };
                                 </script>
-                                                        <li><a href="/api/singlePost/{{post.id}}" title="" class="com"><img src="/images/com.png" alt="">{{post.comments.length}} Comment</a></li>
+                                                        <li><img src="/images/com.png" alt=""><p onclick="comments('{{post.id}}')">{{post.comments.length}} Comment</p></li>
                                                         </ul>
-                                                        <a><i class="la la-eye"></i>Views 50</a>
+                                                        <a href="/api/singlePost/{{post.id}}"><i class="la la-eye"></i>Views Full</a>
+                                                        {{--  comment section  --}}
+                                                        <script>
+                                                            function comments(id){
+                                                                $("#comment-section-"+id).fadeToggle();
+                                                            }
+                                                        </script>
+
+                                                    <div class="user-poster" id="comment-section-{{post.id}}" style="display: none">
+                                                            <div class="usr-post-img">
+                                                                <img src="{{loggedUser.profilePic}}" alt="" width="50px" height="50px">
+                                                            </div>
+                                                            <div class="post_comment_sec">
+                                                                <form action="/api/post/{{post.id}}/comments" method="POST">
+                                                                        <textarea placeholder="Your Comment" name="text"></textarea>
+                                                                        <button type="submit">Add Comment</button>
+                                                                </form>
+                                                            </div><!--post_comment_sec end-->
+                                                        </div>
                                                     </div>
                                                 </div><!--post-bar end-->
                                                 @endeach

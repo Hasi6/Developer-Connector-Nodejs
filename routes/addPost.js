@@ -1,10 +1,13 @@
 const User = require('../models/User');
 const Post = require('../models/Post');
 
+const path = require('path');
+
 const addPost = async (req, res)=>{
     const id = req.session.userId;
 
     const { title, body } = req.body;
+    const { image } = req.files;
 
     backURL=req.header('Referer') || '/';
 
@@ -12,7 +15,9 @@ const addPost = async (req, res)=>{
         return res.render('signup',{msg: 'You Need To log First', type: 'danger'});
     }
     try{
-
+    if(image){
+        await image.mv(path.resolve(__dirname, '../public/images/Post_Images', image.name));
+    }
     const user = await User.findById(id);
 
     if(!user){
@@ -22,7 +27,8 @@ const addPost = async (req, res)=>{
     const post = new Post({
         user: id,
         title,
-        body
+        body,
+        image: '/images/Post_Images/'+image.name
     });
 
     const save = await post.save();
