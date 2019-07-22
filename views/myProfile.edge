@@ -196,25 +196,52 @@
                                                     <div class="job-status-bar">
                                                         <ul class="like-com">
                                                             <li>
-                                                                
-                                                                <form action="/api/posts/likes/{{post.id}}?_method=PUT" method="post">
-                                                                    <a href="#"><button type="submit" name="_method"><i class="la la-heart"></i></button></a>{{post.likes.length}} 
-                                                                </form>
-                                                                    Likes
-
-                                                                
-                                                                <img src="/images/liked-img.png" alt="">
-                                                                <span>25</span>
+                                                                <ul class="react-links">
+                                                                <li><i class="fa fa-heart" onclick="addLikes('{{post.id}}')"></i><div class="likes{{post.id}}">{{post.likes.length}}</div> Likes</li>
+                                                                    <li><i class="fa fa-heart" onclick="addUnlikes('{{post.id}}')"></i><div class="unlikes{{post.id}}">{{post.unlikes.length}}</div> Unlikes</li>
+                                                                </ul>
                                                             </li>
-                                                            <li>
-                                                                
-                                                                <form action="/api/posts/unlikes/{{post.id}}?_method=PUT" method="post">
-                                                                    <a href="#"><button type="submit" name="_method"><i class="la la-heart"></i></button></a>{{post.unlikes.length}} 
-                                                                </form>
-                                                                Unlikes</a>
-                                                                <img src="/images/liked-img.png" alt="">
-                                                                <span>25</span>
-                                                            </li> 
+                                {{--  add like and unlikes using ajax --}}
+                                <script>
+                                    var addLikes = debounce(function(arg){
+                                        var post = arg;
+                                        console.log(post);
+                                        var search = $.get('/api/posts/likes/'+post, function(data){
+                                        })
+                                        .fail(function(err){
+                                            console.log(err);
+                                        })
+                                        document.querySelector('.likes'+post).innerHTML = "{{post.likes.length + 1}}";
+                                        document.querySelector('.unlikes'+post).innerHTML = "{{post.unlikes.length - 1}}";
+                                        }, 200);
+
+                                        var addUnlikes = debounce(function(arg){
+                                        var post = arg;
+                                        var search = $.get('/api/posts/unlikes/'+post, function(data){
+                                        })
+                                        .fail(function(err){
+                                            console.log(err);
+                                        })
+                                        document.querySelector('.unlikes'+post).innerHTML = "{{post.unlikes.length + 1}}";
+                                        document.querySelector('.likes'+post).innerHTML = "{{post.likes.length - 1}}";
+                                        }, 200)
+                            
+                                        function debounce(func, wait, immediate){
+                                            var timeout;
+                                            return function(){
+                                                var context = this,
+                                                args = arguments;
+                                                var later = function(){
+                                                    timeout = null;
+                                                    if(!immediate) func.apply(context, args);
+                                                };
+                                                var callNow = immediate && !timeout;
+                                                clearTimeout(timeout);
+                                                timeout = setTimeout(later, wait);
+                                                if(callNow) func.apply(context,args);
+                                            };
+                                        };
+                                </script>
                                                         <li><a href="/api/singlePost/{{post.id}}" title="" class="com"><img src="/images/com.png" alt="">{{post.comments.length}} Comment</a></li>
                                                         </ul>
                                                         <a><i class="la la-eye"></i>Views 50</a>

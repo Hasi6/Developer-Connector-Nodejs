@@ -7,11 +7,18 @@ const edge = require('edge.js');
 const bodyParser = require("body-parser");
 const methodOverride = require('method-override');
 const fileUpload = require('express-fileupload');
+const cloudinary = require('cloudinary');
 
 
 // connet with database
 const connectDb = require("./config/db");
 connectDb();
+
+cloudinary.config({
+  api_key: '516256983856227',
+  api_secret: '0ujEwrgXo-2f3ynfmnsJU9rn8EY',
+  cloud_name: 'hasitha6'
+})
 
 // express Sessions
 const mongoStore = connectMongo(expressSession);

@@ -43,9 +43,47 @@
                                 <span><i class="fa fa-clock-o"></i>{{post.date}}</span>
                                 <h2>{{post.title}}</h2>
                                 <ul class="react-links">
-                                <li><a href="/api/posts/likes/{{post._id}}" title=""><i class="fa fa-heart"></i>{{post.likes.length}} Likes </a></li>
-                                <li><a href="/api/posts/unlikes/{{post._id}}" title=""><i class="fa fa-heart"></i>{{post.unlikes.length}} Unlikes </a></li>
+                                    <li><i class="fa fa-heart" onclick="addLikes()"></i><div class="likes">{{post.likes.length}}</div> Likes</li>
+                                    <li><i class="fa fa-heart" onclick="addUnlikes()"></i><div class="unlikes">{{post.unlikes.length}}</div> Unlikes</li>
                                 </ul>
+                                {{--  add like and unlikes using ajax --}}
+                                <script>
+                                    var addLikes = debounce(function(arg){
+                                        var search = $.get('/api/posts/likes/{{post._id}}', function(data){
+                                        })
+                                        .fail(function(err){
+                                            console.log(err);
+                                        })
+                                        document.querySelector('.likes').innerHTML = "{{post.likes.length + 1}}";
+                                        document.querySelector('.unlikes').innerHTML = "{{post.unlikes.length - 1}}";
+                                        }, 200);
+
+                                        var addUnlikes = debounce(function(arg){
+                                        var search = $.get('/api/posts/unlikes/{{post._id}}', function(data){
+                                        })
+                                        .fail(function(err){
+                                            console.log(err);
+                                        })
+                                        document.querySelector('.unlikes').innerHTML = "{{post.unlikes.length + 1}}";
+                                        document.querySelector('.likes').innerHTML = "{{post.likes.length - 1}}";
+                                        }, 200)
+                            
+                                        function debounce(func, wait, immediate){
+                                            var timeout;
+                                            return function(){
+                                                var context = this,
+                                                args = arguments;
+                                                var later = function(){
+                                                    timeout = null;
+                                                    if(!immediate) func.apply(context, args);
+                                                };
+                                                var callNow = immediate && !timeout;
+                                                clearTimeout(timeout);
+                                                timeout = setTimeout(later, wait);
+                                                if(callNow) func.apply(context,args);
+                                            };
+                                        };
+                                </script>
                                     <p>{{post.body}}</p>
                                     <div class="comment-section">
                                         <h3>{{post.comments.length}} Comments</h3>
