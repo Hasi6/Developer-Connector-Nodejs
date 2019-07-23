@@ -40,6 +40,14 @@ const PostSchema = new Schema({
                 type: String,
                 required: true
             },
+            userId: {
+                type: Schema.Types.ObjectId,
+                required: true
+            },
+            postId: {
+                type: Schema.Types.ObjectId,
+                required: true
+            },
             userImage:{
                 type: String,
                 required: true

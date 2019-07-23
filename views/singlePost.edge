@@ -49,7 +49,7 @@
                                 {{--  add like and unlikes using ajax --}}
                                 <script>
                                     var addLikes = debounce(function(arg){
-                                        var search = $.get('/api/posts/likes/{{post._id}}', function(data){
+                                        var search = $.get('/api/posts/likes/{{post.id}}', function(data){
                                         })
                                         .fail(function(err){
                                             console.log(err);
@@ -59,7 +59,7 @@
                                         }, 200);
 
                                         var addUnlikes = debounce(function(arg){
-                                        var search = $.get('/api/posts/unlikes/{{post._id}}', function(data){
+                                        var search = $.get('/api/posts/unlikes/{{post.id}}', function(data){
                                         })
                                         .fail(function(err){
                                             console.log(err);

@@ -1,4 +1,5 @@
 const User = require("../models/User");
+const Post = require("../models/Post");
 const path = require('path');
 
 const addProfilePic = async (req, res) => {
@@ -10,6 +11,8 @@ const addProfilePic = async (req, res) => {
 
   let backURL=req.header('Referer') || '/';
 
+
+
   const { profilePic } = req.files;
 
   try {
@@ -20,6 +23,9 @@ const addProfilePic = async (req, res) => {
     if (!user) {
       return res.send("No User Found");
     }
+
+    const posts = await Post.find({userId: id});
+
 
     user.profilePic = '/images/Profile_Images/'+profilePic.name;
     await user.save();

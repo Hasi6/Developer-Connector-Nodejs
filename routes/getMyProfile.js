@@ -18,17 +18,16 @@ const getMyProfile = async(req, res)=>{
         const user = await User.findById(userId);
         const loggedUser = await User.findById(id);
         const posts = await Post.find({user: userId}).sort({date: -1}).limit(10);
+        
         const userEdu = user.education;
-        const userEduSize = userEdu.length;
 
-        console.log(userEdu.length);
         if(user){
             return res.render('myProfile',{
                 user: user,
                 posts: posts,
                 id: id,
                 loggedUser: loggedUser,
-                userEdu: userEdu
+                userEdu: userEdu,
             });
         }
         return res.send('No User Found');

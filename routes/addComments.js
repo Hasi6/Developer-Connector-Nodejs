@@ -20,8 +20,9 @@ const addComment = async (req, res) => {
 
     let comment = {
       user: user.username,
+      userId: userId,
+      postId: postId,
       userImage: user.profilePic,
-      post: postId,
       text
     };
     console.log(post)

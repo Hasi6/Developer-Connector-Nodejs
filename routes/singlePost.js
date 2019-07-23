@@ -1,8 +1,5 @@
 const Post = require('../models/Post');
 const User = require('../models/User');
-const Comments = require('../models/Comments');
-const Likes = require('../models/Likes');
-const Unlikes = require('../models/Unlikes');
 
 const singlePost = async(req, res) => {
     postId = req.params.id;

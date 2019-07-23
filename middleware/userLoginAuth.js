@@ -29,7 +29,7 @@ try{
     nodeoutlook.sendEmail({
       auth: {
         user: "udhmovies@outlook.com",
-        pass: "Hasitha6"
+        pass: "Hasitha66"
       },
       from: "udhmovies@outlook.com",
       to: user.email,
