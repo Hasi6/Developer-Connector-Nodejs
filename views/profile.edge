@@ -17,29 +17,7 @@
     
     
             <section class="cover-sec">
-            <img src="{{user.coverPic}}" alt="" class="img-responsive" height="400px">
-                <a class="open-button" onclick="uploadCover()"><i class="fa fa-camera"></i> Change Image</a>
-
-                    <div class="form-popup" id="myForm">
-                    <form action="/api/user/{{id}}/coverPic?_method=PUT" class="form-container" method="POST" enctype="multipart/form-data">
-                        <h1>Change Cover Picture</h1>
-                        
-                        <input type="file" class="form-control" name="coverPic" required>
-
-                        <button type="submit" name="_method" class="btn">Upload</button>
-                        <button type="button" class="btn cancel" onclick="closeCoverUpload()">Close</button>
-                    </form>
-                    </div>
-
-                    <script>
-                        function uploadCover() {
-                        document.getElementById("myForm").style.display = "block";
-                        }
-
-                        function closeCoverUpload() {
-                        document.getElementById("myForm").style.display = "none";
-                        }
-                    </script>
+                <img src="{{user.coverPic}}" alt="" class="img-responsive" height="400px">
             </section>
     
     
@@ -52,27 +30,7 @@
                                     <div class="main-left-sidebar">
                                         <div class="user_profile">
                                             <div class="user-pro-img">
-                                            <img src="{{user.profilePic}}" alt="" width="170px" height="170px" class="img-responsive">
-
-                                            <a class="open-button" onclick="uploadProfile()"><i class="fa fa-camera"></i></a>
-                                            <div class="form-popup2" id="myForm2">
-                                                <form action="/api/user/{{id}}/profilePic?_method=PUT" class="form-container" method="POST" enctype="multipart/form-data">
-                                                    <input type="file" class="form-control" name="profilePic" required>
-                            
-                                                    <button type="submit" name="_method" class="btn">Upload Proflie</button>
-                                                    <button type="button" class="btn cancel" onclick="closeProfileUpload()">Close</button>
-                                                </form>
-                                            </div>
-                        
-                                            <script>
-                                                function uploadProfile() {
-                                                document.getElementById("myForm2").style.display = "block";
-                                                }
-                        
-                                                function closeProfileUpload() {
-                                                document.getElementById("myForm2").style.display = "none";
-                                                }
-                                            </script>
+                                                <img src="{{user.profilePic}}" alt="" width="170px" height="170px" class="img-responsive">
                                             </div><!--user-pro-img end-->
 
                                             <ul class="social_links">
@@ -108,79 +66,128 @@
                                 </div>
                                 <div class="col-lg-6">
                                     <div class="main-ws-sec">
-                                        @if(profile)
-                                        <div class="user-tab-sec">
-                                        <h3>{{profile.name}}</h3>
-                                            <div class="star-descp">
-                                            <span>{{profile.status}}</span>
-                                            </div><!--star-descp end-->
-                                        </div><!--user-tab-sec end-->
-                                        @else
                                         <div class="user-tab-sec">
                                             <h3>{{user.username}}</h3>
                                         </div><!--user-tab-sec end-->
-                                        @endif
                                         <div class="product-feed-tab current" id="feed-dd">
                                             <div class="posts-section">
-                                            @each(post in posts)
-                                                <div class="post-bar">
-                                                    <div class="post_topbar">
-                                                        <div class="usy-dt">
-                                                            <img src="http://via.placeholder.com/50x50" alt="">
-                                                            <div class="usy-name">
-                                                            <h3>{{profile.name}}</h3>
-                                                            <span><img src="" alt="">{{post.date}}</span>
+                                                <div class="product-feed-tab current" id="feed-dd">
+                                                    <div class="posts-section">
+                                                    @each(post in posts)
+                                                        <div class="post-bar">
+                                                            <div class="post_topbar">
+                                                                <div class="usy-dt">
+                                                                <img src="{{user.profilePic}}" alt="" width="50px" height="50px">
+                                                                    <div class="usy-name">
+                                                                    <h3>{{user.username}}</h3>
+                                                                    <span><img src="" alt="">{{post.date}}</span>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="ed-opts">
+                                                                    <a href="#" title="" class="ed-opts-open"><i class="la la-ellipsis-v"></i></a>
+                                                                    <ul class="ed-options">
+                                                                        <li><a href="" title="">Edit Post</a></li>
+                                                                    </ul>
+                                                                </div>
                                                             </div>
-                                                        </div>
-                                                        <div class="ed-opts">
-                                                            <a href="#" title="" class="ed-opts-open"><i class="la la-ellipsis-v"></i></a>
-                                                            <ul class="ed-options">
-                                                                <li><a href="" title="">Edit Post</a></li>
-                                                            </ul>
-                                                        </div>
-                                                    </div>
-                                                    <div class="epi-sec">
-                                                        <ul class="descp">
-                                                            <li><img src="/images/icon8.png" alt=""><span>Epic Coder</span></li>
-                                                            <li><img src="/images/icon9.png" alt=""><span>India</span></li>
-                                                        </ul>
-                                                    </div>
-                                                    <div class="job_descp">
-                                                    <h3>{{post.name}}</h3>
-                                                        <ul class="job-dt">
-                                                            <li><a href="#" title="">Full Time</a></li>
-                                                            <li><span>$30 / hr</span></li>
-                                                        </ul>
-                                                        <p>{{post.text}}</p>
-                                                    </div>
-                                                    <div class="job-status-bar">
-                                                        <ul class="like-com">
-                                                            <li>
-                                                                
-                                                                <form action="/api/posts/likes/{{post.id}}?_method=PUT" method="post">
-                                                                    <a href="#"><button type="submit" name="_method"><i class="la la-heart"></i></button></a>{{post.likes.length}} 
-                                                                </form>
-                                                                    Likes
-
-                                                                
-                                                                <img src="/images/liked-img.png" alt="">
-                                                                <span>25</span>
-                                                            </li>
-                                                            <li>
-                                                                
-                                                                <form action="/api/posts/unlikes/{{post.id}}?_method=PUT" method="post">
-                                                                    <a href="#"><button type="submit" name="_method"><i class="la la-heart"></i></button></a>{{post.unlikes.length}} 
-                                                                </form>
-                                                                Unlikes</a>
-                                                                <img src="/images/liked-img.png" alt="">
-                                                                <span>25</span>
-                                                            </li> 
-                                                        <li><a href="/api/singlePost/{{post.id}}" title="" class="com"><img src="/images/com.png" alt="">{{post.comments.length}} Comment</a></li>
-                                                        </ul>
-                                                        <a><i class="la la-eye"></i>Views 50</a>
-                                                    </div>
-                                                </div><!--post-bar end-->
-                                                @endeach
+                                                            <div class="epi-sec">
+                                                                <ul class="descp">
+                                                                    <li><img src="/images/icon8.png" alt=""><span>Epic Coder</span></li>
+                                                                    <li><img src="/images/icon9.png" alt=""><span>India</span></li>
+                                                                </ul>
+                                                            </div>
+                                                            <div class="job_descp">
+                                                            <h3>{{post.title}}</h3>
+                                                                <ul class="job-dt">
+                                                                    <li><a href="#" title="">Full Time</a></li>
+                                                                    <li><span>$30 / hr</span></li>
+                                                                </ul>
+                                                            <img src="{{post.image}}" alt="" width="500px">
+                                                                <p>{{post.body}}</p>
+                                                            </div>
+                                                            <div class="job-status-bar">
+                                                                <ul class="like-com">
+                                                                    <li>
+                                                                        <ul class="react-links">
+                                                                        <li><i class="fa fa-heart" onclick="addLikes('{{post.id}}')"></i><div class="likes{{post.id}}">{{post.likes.length}}</div> Likes</li>
+                                                                            <li><i class="fa fa-heart" onclick="addUnlikes('{{post.id}}')"></i><div class="unlikes{{post.id}}">{{post.unlikes.length}}</div> Unlikes</li>
+                                                                        </ul>
+                                                                    </li>
+                                        {{--  add like and unlikes using ajax --}}
+                                        <script>
+                                            var addLikes = debounce(function(arg){
+                                                var post = arg;
+                                                console.log(post);
+                                                var search = $.get('/api/posts/likes/'+post, function(data){
+                                                })
+                                                .fail(function(err){
+                                                    console.log(err);
+                                                })
+                                                document.querySelector('.likes'+post).innerHTML = "{{post.likes.length + 1}}";
+                                                document.querySelector('.unlikes'+post).innerHTML = "{{post.unlikes.length - 1}}";
+                                                }, 200);
+        
+                                                var addUnlikes = debounce(function(arg){
+                                                var post = arg;
+                                                var search = $.get('/api/posts/unlikes/'+post, function(data){
+                                                })
+                                                .fail(function(err){
+                                                    console.log(err);
+                                                })
+                                                document.querySelector('.unlikes'+post).innerHTML = "{{post.unlikes.length + 1}}";
+                                                document.querySelector('.likes'+post).innerHTML = "{{post.likes.length - 1}}";
+                                                }, 200)
+                                    
+                                                function debounce(func, wait, immediate){
+                                                    var timeout;
+                                                    return function(){
+                                                        var context = this,
+                                                        args = arguments;
+                                                        var later = function(){
+                                                            timeout = null;
+                                                            if(!immediate) func.apply(context, args);
+                                                        };
+                                                        var callNow = immediate && !timeout;
+                                                        clearTimeout(timeout);
+                                                        timeout = setTimeout(later, wait);
+                                                        if(callNow) func.apply(context,args);
+                                                    };
+                                                };
+                                        </script>
+                                                                <li><img src="/images/com.png" alt=""><p onclick="comments('{{post.id}}')">{{post.comments.length}} Comment</p></li>
+                                                                </ul>
+                                                                <a href="/api/singlePost/{{post.id}}"><i class="la la-eye"></i>Views Full</a>
+                                                                {{--  comment section  --}}
+                                                                <script>
+                                                                    function comments(id){
+                                                                        $("#comment-section-"+id).fadeToggle();
+                                                                    }
+                                                                </script>
+        
+                                                            <div class="user-poster" id="comment-section-{{post.id}}" style="display: none">
+                                                                    <div class="usr-post-img">
+                                                                        <img src="{{loggedUser.profilePic}}" alt="" width="50px" height="50px">
+                                                                    </div>
+                                                                    <div class="post_comment_sec">
+                                                                        <form action="/api/post/{{post.id}}/comments" method="POST">
+                                                                                <textarea placeholder="Your Comment" name="text"></textarea>
+                                                                                <button type="submit">Add Comment</button>
+                                                                        </form>
+                                                                    </div><!--post_comment_sec end-->
+                                                                </div>
+                                                            </div>
+                                                        </div><!--post-bar end-->
+                                                        @endeach
+        
+                                                        <div class="process-comm">
+                                                            <div class="spinner">
+                                                                <div class="bounce1"></div>
+                                                                <div class="bounce2"></div>
+                                                                <div class="bounce3"></div>
+                                                            </div>
+                                                        </div><!--process-comm end-->
+                                                    </div><!--posts-section end-->
+                                                </div><!--product-feed-tab end-->
 
                                                 <div class="process-comm">
                                                     <div class="spinner">

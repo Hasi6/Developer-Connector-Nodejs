@@ -11,15 +11,10 @@ const getOneProfile = async(req, res)=>{
         return res.render("signup", {msg: 'Unauthorized Action', type: 'danger'});
     }
 
-    
-
     try{
         const user = await User.findById(userId);
         const loggedUser = await User.findById(id);
         const posts = await Post.find({user: userId});
-
-        console.log(user.social);
-
 
         if(user){
             const profile = await Profile.findOne({user:userId});
