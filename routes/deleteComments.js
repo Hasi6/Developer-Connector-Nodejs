@@ -21,10 +21,10 @@ const deletePost = async (req, res)=>{
             return res.send('No Comments Found');
         }
         
-       if(comment.user.toString() === userId || post.user.toString() === userId){
+       if(comment.userId.toString() === userId || post.user.toString() === userId){
 
             // get remove index
-            const removeIndex = post.comments.map(comment => comment.user.toString()).indexOf(userId);
+            const removeIndex = post.comments.map(comment => comment.userId.toString()).indexOf(userId);
 
             post.comments.splice(removeIndex, 1);
 

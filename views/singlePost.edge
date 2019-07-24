@@ -102,7 +102,7 @@
                                                         <span><img src="images/clock.png" alt="">{{comment.date}}</span>
                                                             <p>{{comment.text}}</p>
                                                         </div>
-                                                        @if(post.user == loggedUser.id)
+                                                        @if(post.user == loggedUser.id || comment.userId == loggedUser.id )
                                                             <div class="delete">
                                                             <form action="/api/post/{{post.id}}/comments/{{comment.id}}?_method=DELETE" method="POST">
                                                                     <button class="btn btn-danger" name="_method" type="submit" style="cursor: pointer">Delete Comment</button>

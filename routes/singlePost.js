@@ -15,6 +15,9 @@ const singlePost = async(req, res) => {
     if(!post){
         return res.redirect(backURL);
     }
+    const commentUserIds = post.comments.map((user)=> { return user.userId});
+
+    const commentedUser = commentUserIds.includes(userId);
 
     return res.render('singlePost', {
         post: post,
@@ -22,7 +25,8 @@ const singlePost = async(req, res) => {
         loggedUser: loggedUser,
         comments: post.comments,
         likesCount: post.likes,
-        unlikesCount: post.unlikes
+        unlikesCount: post.unlikes,
+        commentedUser : commentedUser
     })
 }catch(err){
     console.error(err.message);
