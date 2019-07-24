@@ -20,6 +20,9 @@ const getMyProfile = async(req, res)=>{
         const posts = await Post.find({user: userId}).sort({date: -1}).limit(10);
         
         const userEdu = user.education;
+        const userExp = user.exprience[0];
+
+        console.log(userExp);
 
         if(user){
             return res.render('myProfile',{
@@ -28,6 +31,7 @@ const getMyProfile = async(req, res)=>{
                 id: id,
                 loggedUser: loggedUser,
                 userEdu: userEdu,
+                userExp: userExp
             });
         }
         return res.send('No User Found');

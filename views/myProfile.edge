@@ -93,23 +93,24 @@
                                                 @endif
                                             </ul>
                                         </div><!--user_profile end-->
+                                        @if(userExp)
                                         <div class="suggestions full-width">
                                             <div class="sd-title">
-                                                <h3>People Viewed Profile</h3>
+                                                <h3>User Experience</h3>
                                                 <i class="la la-ellipsis-v"></i>
                                             </div><!--sd-title end-->
                                             <div class="suggestions-list">
                                                 <div class="suggestion-usd">
-                                                    <img src="http://via.placeholder.com/35x35" alt="">
                                                     <div class="sgt-text">
-                                                        <h4>Jessica William</h4>
-                                                        <span>Graphic Designer</span>
+                                                    <h4>{{userExp.company}}</h4>
+                                                    <span>{{userExp.title}}</span>
                                                     </div>
-                                                    <span><i class="la la-plus"></i></span>
                                                 </div>
                                             </div><!--suggestions-list end-->
                                         </div><!--suggestions end-->
+                                        @endif
 
+                                        @if(userEdu.length > 0)
                                         <div class="suggestions full-width">
                                             <div class="sd-title">
                                                 <h3>Education</h3>
@@ -128,6 +129,8 @@
                                                 </div>
                                             </div><!--suggestions-list end-->
                                         </div><!--suggestions end-->
+                                        @endif
+
                                     </div><!--main-left-sidebar end-->
                                 </div>
                                 <div class="col-lg-6">

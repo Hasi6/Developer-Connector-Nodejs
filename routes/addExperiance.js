@@ -3,20 +3,24 @@ const User = require("../models/User");
 const addExperiance = async (req, res) => {
   const id = req.session.userId;
 
-  const { title, company, location, from, to, current, description } = req.body;
+  const { title, company, country, from, to, description } = req.body;
 
+  console.log(title);
+  
+  if(title == '' || company== '' || country == '' || from == '' || to == '' || description == ''){
+    return res.render('profileSettings', {msg: 'Please fill all Fields', type: 'danger'});
+  }
   const newExp = {
     title,
     company,
-    location,
+    country,
     from,
     to,
-    current,
     description
   };
 
   try {
-    const user = await User.findOne({ user: id });
+    const user = await User.findById(id);
 
     if (!user) {
       return res.send("No User Found");
@@ -26,7 +30,7 @@ const addExperiance = async (req, res) => {
     await user.save();
     console.log(user.exprience);
 
-    return res.send(newExp);
+    return res.redirect('/api/myProfile/'+id);
   } catch (err) {
     console.error(err.message);
   }

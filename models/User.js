@@ -72,7 +72,7 @@ const UsersSchema = new mongoose.Schema({
               type: String,
               required: true
           },
-          location: {
+          country: {
               type: String,
               required: true
           },
@@ -83,10 +83,6 @@ const UsersSchema = new mongoose.Schema({
           to:{
             type: Date,
             required: true
-          },
-          current: {
-              type: Boolean,
-              required: true
           },
           description: {
               type: String,

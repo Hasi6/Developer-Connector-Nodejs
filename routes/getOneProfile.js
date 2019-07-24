@@ -16,6 +16,9 @@ const getOneProfile = async(req, res)=>{
         const loggedUser = await User.findById(id);
         const posts = await Post.find({user: userId});
 
+        const userEdu = user.education;
+        const userExp = user.exprience[0]
+
         if(user){
             const profile = await Profile.findOne({user:userId});
             return res.render('profile',{
@@ -23,7 +26,9 @@ const getOneProfile = async(req, res)=>{
                 profile: profile,
                 posts: posts,
                 id: id,
-                loggedUser: loggedUser
+                loggedUser: loggedUser,
+                userEdu: userEdu,
+                userExp: userExp
             });
         }
         return res.send('No User Found');

@@ -7,6 +7,7 @@ const addEducation = async (req, res) => {
     return res.render('signup', {msg: "Unauthorized Action", type: "danger"});
   }
 
+
   const { school, degree, fieldofstudy, from, to, description } = req.body;
 
   const newEdu = {
@@ -27,7 +28,7 @@ const addEducation = async (req, res) => {
     await user.education.unshift(newEdu);
     await user.save();
 
-    return res.render("profileSettings", {msg: "Update Successfully", type: 'success'});
+    return res.redirect('/api/myProfile/:userId');
   } catch (err) {
     console.error(err.message);
   }
