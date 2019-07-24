@@ -132,6 +132,10 @@ const UsersSchema = new mongoose.Schema({
         instagram: {
           type: String
         }
+      },
+      lastLogin: {
+        type: Date,
+        default: Date.now
       }
 });
 

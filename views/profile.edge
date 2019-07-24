@@ -33,6 +33,22 @@
                                                 <img src="{{user.profilePic}}" alt="" width="170px" height="170px" class="img-responsive">
                                             </div><!--user-pro-img end-->
 
+                                            <span>Last Login <br>{{user.lastLogin.getFullYear() + '/' + user.lastLogin.getMonth() + '/' + user.lastLogin.getDate()}}</span>
+                                            <br>
+                                            @if(user.lastLogin.getMinutes() < 10)
+                                                @if(user.lastLogin.getHours() < 12)
+                                                    <span>{{user.lastLogin.getHours() + ':0' + user.lastLogin.getMinutes() + ' AM'}}</span>
+                                                @else
+                                                    <span>{{user.lastLogin.getHours() + ':0' + user.lastLogin.getMinutes() + ' PM'}}</span>
+                                                @endif
+                                            @else
+                                                @if(user.lastLogin.getHours() < 12)
+                                                    <span>{{user.lastLogin.getHours() + ':' + user.lastLogin.getMinutes() + ' AM'}}</span>
+                                                @else
+                                                    <span>{{user.lastLogin.getHours() + ':' + user.lastLogin.getMinutes() + ' PM'}}</span>
+                                                @endif
+                                            @endif
+
                                             <ul class="social_links">
                                                 <li><a href="#" title=""><i class="la la-globe"></i> www.example.com</a></li>
                                                 <li><a href="#" title=""><i class="fa fa-facebook-square"></i> Http://www.facebook.com/john...</a></li>

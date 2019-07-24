@@ -1,4 +1,5 @@
 const User = require("../models/User");
+const Post = require("../models/Post");
 const path = require('path');
 
 const addProfilePic = async (req, res) => {
@@ -10,7 +11,7 @@ const addProfilePic = async (req, res) => {
 
   let backURL=req.header('Referer') || '/';
 
-
+  
 
   const { profilePic } = req.files;
 

@@ -5,6 +5,10 @@ const userLogin = async (req, res) => {
 
 try{
   const user = await User.findOne({ email: email });
+
+  user.lastLogin == Date.now
+  await user.save();
+
   req.session.userId = user._id;
   return res.redirect(`/api/myProfile/${req.session.userId}`);
 }catch(err){

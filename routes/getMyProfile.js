@@ -22,8 +22,6 @@ const getMyProfile = async(req, res)=>{
         const userEdu = user.education;
         const userExp = user.exprience[0];
 
-        console.log(userExp);
-
         if(user){
             return res.render('myProfile',{
                 user: user,

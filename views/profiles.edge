@@ -17,8 +17,22 @@
                         width: 130px;
                         height: 130px;">
                         <h3>{{profile.username}}</h3>
-                        <h4>Last Login <br>{{profile.signInDate}}</h4>
-                        </div>
+						<span>Last Login <br>{{profile.lastLogin.getFullYear() + '/' + profile.lastLogin.getMonth() + '/' + profile.lastLogin.getDate()}}</span>
+						<br>
+						@if(profile.lastLogin.getMinutes() < 10)
+							@if(profile.lastLogin.getHours() < 12)
+								<span>{{profile.lastLogin.getHours() + ':0' + profile.lastLogin.getMinutes() + ' AM'}}</span>
+							@else
+								<span>{{profile.lastLogin.getHours() + ':0' + profile.lastLogin.getMinutes() + ' PM'}}</span>
+							@endif
+						@else
+							@if(profile.lastLogin.getHours() < 12)
+								<span>{{profile.lastLogin.getHours() + ':' + profile.lastLogin.getMinutes() + ' AM'}}</span>
+							@else
+								<span>{{profile.lastLogin.getHours() + ':' + profile.lastLogin.getMinutes() + ' PM'}}</span>
+							@endif
+						@endif
+					</div>
                     <a href="/api/profile/{{profile.id}}" title="" class="view-more-pro">View Profile</a>
                     </div><!--company_profile_info end-->
                 </div>
