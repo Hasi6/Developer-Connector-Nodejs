@@ -33,7 +33,7 @@
     "mongoose": "^5.6.2",
     "mongoose-paginate": "^5.0.3",
     "nodejs-nodemailer-outlook": "^1.1.0",
-    "nodemailer": "^6.2.1",
+    "nodemailer": "^6.4.16",
     "randomstring": "^1.1.5",
     "react-inline-script": "^1.2.0",
     "react-owl-carousel": "^2.3.1",
