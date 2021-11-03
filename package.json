@@ -39,7 +39,7 @@
     "react-owl-carousel": "^2.3.1",
     "redux-devtools-extension": "^2.13.8",
     "request": "^2.88.0",
-    "validator": "^11.1.0"
+    "validator": "^13.7.0"
   },
   "devDependencies": {
     "concurrently": "^4.1.1",
